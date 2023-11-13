@@ -16,10 +16,10 @@ import SectionTitle from '../../components/SectionTitle/SectionTitle';
 
 const Slider = () => {
     return (
-        <section>
+        <section className='max-w-screen-xl px-4 md:px-6 lg:px-8 mx-auto'>
             <SectionTitle
                 heading={'ORDER ONLINE'}
-                subHeading={'---From 11:00am to 10:00pm---'}
+                subHeading={'From 11:00am to 10:00pm'}
             ></SectionTitle>
             <Swiper
                 slidesPerView={4}
@@ -28,7 +28,7 @@ const Slider = () => {
                 clickable: false,
                 }}
                 modules={[Pagination]}
-                className="mySwiper max-w-screen-lg mx-auto my-16"
+                className="mySwiper mb-16"
             >
                 <SwiperSlide>
                     <img src={slide1} alt="" />
