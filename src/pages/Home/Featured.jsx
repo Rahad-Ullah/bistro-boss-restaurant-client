@@ -5,7 +5,7 @@ import './feature.css'
 
 const Featured = () => {
     return (
-        <div className="feature-bg py-16 lg:py-32 pt-6 lg:pt-16 text-white">
+        <div className="feature-bg bg-fixed py-16 lg:py-32 pt-6 lg:pt-16 text-white">
             <div className={` max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 `}>
                 <SectionTitle
                     heading={'FROM OUR MENU'}
