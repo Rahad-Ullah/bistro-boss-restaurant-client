@@ -11,7 +11,7 @@ import img_6 from '../../assets/home/06.png'
 
 const Banner = () => {
     return (
-        <Carousel className="flex flex-col items-center justify-between">
+        <Carousel className="flex flex-col items-center text-center">
             <div>
                 <img src={img_1} />
             </div>

@@ -7,3 +7,59 @@
 body{
     font-family: 'Inter', sans-serif;
 }
+
+.btn-normal {
+    position: relative;
+    display: inline-block;
+    padding: 12px 30px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #BB8506;
+    background: #E8E8E8;
+    cursor: pointer;
+    transition: all ease-out 0.5s;
+    border-bottom: 2px solid #BB8506;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #1F2937;
+  }
+  
+  .btn-normal:hover {
+    background-color: #9d9d9d5c;
+    box-shadow: inset 0 -100px 0 0 #1F2937;
+    border-bottom: 2px solid #1F2937;
+
+  }
+  
+  .btn-normal:active {
+    transform: scale(0.9);
+  }
+
+
+  /* supper button */
+  .btn-super {
+    color: #1F2937;
+    background: transparent;
+    border-bottom: 2px solid #1F2937;
+    box-shadow: inset 0 0 0 0 #1F2937;
+  }
+
+  .btn-super:hover {
+    color: #BB8506;
+    box-shadow: inset 0 -100px 0 0 #1F2937;
+  }
+
+
+  /* light button */
+  .btn-light {
+    color: white;
+    background: transparent;
+    border-bottom: 2px solid white;
+    box-shadow: inset 0 0 0 0 white;
+  }
+
+  .btn-light:hover {
+    color: #1F2937;
+    box-shadow: inset 0 -100px 0 0 white;
+    border-bottom: 2px solid white;
+  }
