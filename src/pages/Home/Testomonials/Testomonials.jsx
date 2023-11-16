@@ -33,15 +33,15 @@ const Testomonials = () => {
                 {
                     reviews.map(review => <SwiperSlide
                     key={review._id}>
-                        <div  className="flex flex-col items-center gap-y-5 max-w-screen-lg mx-auto">
+                        <div  className="flex flex-col items-center gap-y-5 max-w-xs md:max-w-sm lg:max-w-screen-sm xl:max-w-screen-lg mx-auto">
                             <Rating
                                 style={{ maxWidth: 180, color: "red" }}
                                 value={review.rating}
                                 readOnly
                             />
-                            <FaQuoteLeft className="text-6xl text-[#151515]"/>
+                            <FaQuoteLeft className="text-3xl md:text-6xl text-[#151515]"/>
                             <p className="text-center">{review.details}</p>
-                            <h3 className="font-medium text-secondary text-2xl uppercase">{review.name}</h3>
+                            <h3 className="font-medium text-secondary text-lg md:text-2xl uppercase">{review.name}</h3>
                         </div>
                     </SwiperSlide>)
                 }
