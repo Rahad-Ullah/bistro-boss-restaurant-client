@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MenuItem from "../../components/menuItem";
+import { Link } from "react-router-dom";
 
 const PopularMenu = ({category, btnText}) => {
     const [menu, setMenu] = useState([])
@@ -25,7 +26,7 @@ const PopularMenu = ({category, btnText}) => {
                 }
             </div>
             <div className="flex justify-center my-12">
-                <button className="btn-normal btn-super">{btnText}</button>
+                <Link to={`/order/${category}`} className="btn-normal btn-super">{btnText}</Link>
             </div>
         </div>
     );
