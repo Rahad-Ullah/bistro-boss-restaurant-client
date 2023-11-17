@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import FoodCard from "./FoodCard";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import HelmetDynamic from "../../components/Helmet/HelmetDynamic";
 
 const OrderFood = () => {
     const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks']
@@ -25,6 +27,7 @@ const OrderFood = () => {
     
     return (
         <div>
+            <HelmetDynamic></HelmetDynamic>
             <PageHeader
                 title={'OUR SHOP'}
                 subTitle={'Would you like to try a dish?'}
