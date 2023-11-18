@@ -7,7 +7,7 @@ const PopularMenu = ({category, btnText}) => {
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
-        axios.get('menu.json')
+        axios.get('http://localhost:5000/menu')
         .then(res => {
             const popularItems = res.data.filter(item => item.category === category)
             setMenu(popularItems)

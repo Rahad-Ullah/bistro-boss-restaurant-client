@@ -8,13 +8,12 @@ import dessertImg from "../../../assets/menu/dessert-bg.jpeg"
 import pizzaImg from "../../../assets/menu/pizza-bg.jpg"
 import saladImg from "../../../assets/menu/salad-bg.jpg"
 import soupImg from "../../../assets/menu/soup-bg.jpg"
+import HelmetDynamic from "../../../components/Helmet/HelmetDynamic";
 
 const Menu = () => {
     return (
         <div>
-            <Helmet>
-                <title>Bistro Boss | Menu</title>
-            </Helmet>
+            <HelmetDynamic title={'Menu'}></HelmetDynamic>
             <PageHeader
                 bgImage={menuBg}
                 title={'OUR MENU'}
