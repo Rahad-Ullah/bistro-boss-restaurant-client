@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import loginImg from "../../assets/others/authentication1.png"
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useEffect, useRef, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true)
+    const [error, setError] = useState(null)
     const captchaRef = useRef()
+    const navigate = useNavigate()
+    const {signIn} = useAuth()
 
     useEffect( () => {
         loadCaptchaEnginge(6); 
@@ -17,9 +22,11 @@ const Login = () => {
         console.log(userInput)
         if(validateCaptcha(userInput)){
             setDisabled(false)
+            setError(null)
         }
         else{
             setDisabled(true)
+            setError('Captcha does not matched')
         }
     }
 
@@ -30,29 +37,27 @@ const Login = () => {
         const password = form.password.value;
         console.log(email, password)
 
-
-    
-    
-        // signIn(email, password)
-        // .then((result) => {
-        //   console.log(result.user)
-        //   navigate(location?.state || '/')
-        //   Swal.fire({
-        //     title: 'Success!',
-        //     text: 'Login successful',
-        //     icon: 'success',
-        //     confirmButtonText: 'Ok'
-        //   })
-        // })
-        // .catch((err) => {
-        //   console.log(err)
-        //   Swal.fire({
-        //     title: 'Login Failed!',
-        //     text: 'Invalid Email or Password',
-        //     icon: 'error',
-        //     confirmButtonText: 'Try again'
-        //   })
-        // });
+        // signIn
+        signIn(email, password)
+        .then((result) => {
+          console.log(result.user)
+          navigate(location?.state || '/')
+          Swal.fire({
+            title: 'Success!',
+            text: 'Login successful',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+          Swal.fire({
+            title: 'Login Failed!',
+            text: 'Invalid Email or Password',
+            icon: 'error',
+            confirmButtonText: 'Try again'
+          })
+        });
       }
     
     return (
@@ -102,11 +107,13 @@ const Login = () => {
                         <input
                             type="text"
                             ref={captchaRef}
+                            onChange={() => setError(null)}
                             placeholder="Enter Captcha"
                             className="input input-bordered"
                             name="captcha"
                             required
                         />
+                        <p className="text-red-500 text-sm mt-1">{error}</p>
                     </div>
                     <div className="form-control mt-6 space-y-3">
                         <button disabled={!disabled} onClick={handleCaptcha} className="btn btn-neutral normal-case text-base">Validate Captcha</button>
@@ -117,7 +124,7 @@ const Login = () => {
                 <div className="flex justify-center gap-4 px-8">
                     <button className="btn btn-primary btn-outline normal-case text-base w-full "><FcGoogle className="text-xl"></FcGoogle>Google</button>
                 </div>
-                <p className="text-[#737373] text-center text-sm mt-10">Not have an account? <Link to={'/sign-up'} className="text-primary font-semibold hover:btn-link">Sign Up</Link></p>
+                <p className="text-[#737373] text-center text-sm mt-10">Not have an account? <Link to={'/auth/sign-up'} className="text-primary font-semibold hover:btn-link">Sign Up</Link></p>
             </div>
             </div>
         </div>
