@@ -1,6 +1,7 @@
 
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { FaShoppingCart } from 'react-icons/fa';
 
 const Navbar = () => {
 
@@ -24,6 +25,12 @@ const Navbar = () => {
             <li><NavLink onClick={handleLogout} className={({isActive}) => isActive ? 'text-red-400' : 'text-white'}>Logout</NavLink></li>
             : <li><NavLink to={'/auth/login'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Login</NavLink></li>
         }
+        <li>
+            <button className="btn">
+            <FaShoppingCart className="text-xl"></FaShoppingCart>
+            <div className="badge badge-secondary">+0</div>
+            </button>
+        </li>
     </>
     
     return (
@@ -41,7 +48,7 @@ const Navbar = () => {
                         <h1 className="flex flex-col uppercase"><span className="text-xl">Bistro Boss </span> <span className=" tracking-[0.16em]">Restaurant</span></h1>
                     </div>
                     <div className="flex-none hidden lg:block">
-                        <ul className="uppercase menu-horizontal text-sm font-medium gap-4">
+                        <ul className="uppercase menu-horizontal items-center text-sm font-medium gap-4">
                         {/* Navbar menu content here */}
                             {links}
                         </ul>

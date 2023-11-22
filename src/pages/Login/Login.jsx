@@ -13,7 +13,9 @@ const Login = () => {
     const captchaRef = useRef()
     const navigate = useNavigate()
     const location = useLocation()
+    console.log(location)
     const {signIn} = useAuth()
+    
 
     useEffect( () => {
         loadCaptchaEnginge(6); 
@@ -41,14 +43,14 @@ const Login = () => {
         // signIn
         signIn(email, password)
         .then((result) => {
-          console.log(result.user)
-          navigate(location?.state?.from?.pathname || '/')
-          Swal.fire({
-            title: 'Success!',
-            text: 'Login successful',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          })
+            console.log(result.user)
+            Swal.fire({
+              title: 'Success!',
+              text: 'Login successful',
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            })
+            navigate(location?.state?.from?.pathname || '/')
         })
         .catch((err) => {
           console.log(err)

@@ -1,20 +1,21 @@
 
 import singUpImg from '../../assets/others/authentication.gif'
 import useAuth from '../../hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import HelmetDynamic from '../../components/Helmet/HelmetDynamic';
 
 const SignUp = () => {
-    const {createUser} = useAuth()
+    const {createUser, updateUser} = useAuth()
+    const navigate = useNavigate()
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
       } = useForm()
-      console.log(errors)
 
 
     const onSubmit = (data) => {
@@ -22,12 +23,19 @@ const SignUp = () => {
         .then(res => {
             const loggedUser = res.user;
             console.log(loggedUser)
-            Swal.fire({
-                title: 'Success!',
-                text: 'Sign up successful',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-            })
+            updateUser(data.name, data.photo)
+            .then(() => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Sign up successful',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+                navigate('/')
+                reset()
+            }).catch((err) => {
+                console.log(err)
+            });
         }) 
         .catch((err) => {
             console.log(err)
