@@ -1,16 +1,18 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import loginImg from "../../assets/others/authentication1.png"
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import HelmetDynamic from "../../components/Helmet/HelmetDynamic";
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true)
     const [error, setError] = useState(null)
     const captchaRef = useRef()
     const navigate = useNavigate()
+    const location = useLocation()
     const {signIn} = useAuth()
 
     useEffect( () => {
@@ -19,10 +21,9 @@ const Login = () => {
 
     const handleCaptcha = () => {
         const userInput = captchaRef.current.value;
-        console.log(userInput)
         if(validateCaptcha(userInput)){
             setDisabled(false)
-            setError(null)
+            setError('success')
         }
         else{
             setDisabled(true)
@@ -41,7 +42,7 @@ const Login = () => {
         signIn(email, password)
         .then((result) => {
           console.log(result.user)
-          navigate(location?.state || '/')
+          navigate(location?.state?.from?.pathname || '/')
           Swal.fire({
             title: 'Success!',
             text: 'Login successful',
@@ -61,6 +62,10 @@ const Login = () => {
       }
     
     return (
+    <>
+        <HelmetDynamic
+            title={'Login'}
+        ></HelmetDynamic>
         <div className="hero min-h-screen font-poppins py-8 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <div className="hero-content grid grid-cols-1 lg:grid-cols-11 gap-16 justify-between items-center">
             <div className="w-full flex justify-center items-center lg:col-span-5">
@@ -113,7 +118,9 @@ const Login = () => {
                             name="captcha"
                             required
                         />
-                        <p className="text-red-500 text-sm mt-1">{error}</p>
+                        {error === 'success' && <p className="text-green-600
+                         text-sm mt-1">Captcha matched</p>}
+                        {error !== 'success' && <p className="text-red-500 text-sm mt-1">{error}</p>}
                     </div>
                     <div className="form-control mt-6 space-y-3">
                         <button disabled={!disabled} onClick={handleCaptcha} className="btn btn-neutral normal-case text-base">Validate Captcha</button>
@@ -128,6 +135,7 @@ const Login = () => {
             </div>
             </div>
         </div>
+    </>
     );
 };
 

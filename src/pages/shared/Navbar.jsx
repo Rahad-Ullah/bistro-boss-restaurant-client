@@ -1,15 +1,29 @@
+
 import { NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
 
+    const {user, logout} = useAuth()
+
+    const handleLogout = () =>{
+        logout()
+        .then(() => console.log('Logout success'))
+        .catch(err => console.log(err))
+    }
+    
     const links = <>
         <li><NavLink to={'/'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Home</NavLink></li>
         <li><NavLink to={'/dashboard'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Dashboard</NavLink></li>
         <li><NavLink to={'/menu'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Our Menu</NavLink></li>
         <li><NavLink to={'/order/salad'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Our Shop</NavLink></li>
         <li><NavLink to={'/contact-us'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Contact Us</NavLink></li>
-        <li><NavLink to={'/auth/login'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Login</NavLink></li>
         <li><NavLink to={'/auth/sign-up'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Register</NavLink></li>
+        {
+            user ? 
+            <li><NavLink onClick={handleLogout} className={({isActive}) => isActive ? 'text-red-400' : 'text-white'}>Logout</NavLink></li>
+            : <li><NavLink to={'/auth/login'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Login</NavLink></li>
+        }
     </>
     
     return (
