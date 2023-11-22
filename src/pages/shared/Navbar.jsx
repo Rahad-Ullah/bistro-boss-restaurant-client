@@ -2,10 +2,12 @@
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { FaShoppingCart } from 'react-icons/fa';
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
 
     const {user, logout} = useAuth()
+    const [cart] = useCart()
 
     const handleLogout = () =>{
         logout()
@@ -28,7 +30,7 @@ const Navbar = () => {
         <li>
             <button className="btn">
             <FaShoppingCart className="text-xl"></FaShoppingCart>
-            <div className="badge badge-secondary">+0</div>
+            <div className="badge badge-secondary">{cart.length}</div>
             </button>
         </li>
     </>
