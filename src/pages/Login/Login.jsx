@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import HelmetDynamic from "../../components/Helmet/HelmetDynamic";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true)
@@ -13,8 +14,8 @@ const Login = () => {
     const captchaRef = useRef()
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location)
-    const {signIn} = useAuth()
+    const {signIn, googleSignIn} = useAuth()
+    const axiosPublic = useAxiosPublic()
     
 
     useEffect( () => {
@@ -61,6 +62,22 @@ const Login = () => {
             confirmButtonText: 'Try again'
           })
         });
+      }
+
+      const handleGoogleSignIn = () => {
+        googleSignIn()
+        .then(res => {
+            // send user to server
+            const userInfo = {
+                name: res.user?.displayName,
+                email: res.user?.email,
+            }
+            axiosPublic.post('/users', userInfo)
+            .then(res => {
+                console.log(res.data)
+                navigate('/')
+            })
+        })
       }
     
     return (
@@ -129,9 +146,9 @@ const Login = () => {
                         <button disabled={disabled} className="btn btn-primary normal-case text-base">Login</button>
                     </div>
                 </form>
-                <p className="font-medium text-sm mb-7 text-center">Or Sign In with</p>
+                <div className="divider px-8 mb-8">OR</div>
                 <div className="flex justify-center gap-4 px-8">
-                    <button className="btn btn-primary btn-outline normal-case text-base w-full "><FcGoogle className="text-xl"></FcGoogle>Google</button>
+                    <button onClick={handleGoogleSignIn} className="btn btn-primary btn-outline normal-case text-base w-full "><FcGoogle className="text-xl"></FcGoogle>Google</button>
                 </div>
                 <p className="text-[#737373] text-center text-sm mt-10">Not have an account? <Link to={'/auth/sign-up'} className="text-primary font-semibold hover:btn-link">Sign Up</Link></p>
             </div>

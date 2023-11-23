@@ -5,9 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import HelmetDynamic from '../../components/Helmet/HelmetDynamic';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const SignUp = () => {
     const {createUser, updateUser} = useAuth()
+    const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
 
     const {
@@ -23,16 +25,28 @@ const SignUp = () => {
         .then(res => {
             const loggedUser = res.user;
             console.log(loggedUser)
+            // update user name and photo
             updateUser(data.name, data.photo)
             .then(() => {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Sign up successful',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
+                // create user entry in database
+                const userInfo = {
+                    name: data.name, 
+                    email: data.email,
+                }
+                axiosPublic.post('/users', userInfo)
+                .then(res => {
+                    if(res.data.insertedId){
+                        console.log('user added to database')
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Sign up successful',
+                            icon: 'success',
+                            confirmButtonText: 'Ok'
+                        })
+                        navigate('/')
+                        reset()
+                    }
                 })
-                navigate('/')
-                reset()
             }).catch((err) => {
                 console.log(err)
             });

@@ -28,10 +28,10 @@ const Navbar = () => {
             : <li><NavLink to={'/auth/login'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Login</NavLink></li>
         }
         <li>
-            <button className="btn">
+            <NavLink to={'/dashboard/cart'} className="btn">
             <FaShoppingCart className="text-xl"></FaShoppingCart>
             <div className="badge badge-secondary">{cart.length}</div>
-            </button>
+            </NavLink>
         </li>
     </>
     

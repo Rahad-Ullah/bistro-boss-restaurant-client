@@ -48,6 +48,7 @@ const Cart = () => {
                     <button className="btn btn-secondary">Pay</button>
                 </div>
                 <div>
+                    {/* heading */}
                     <div className="grid md:grid-cols-12 justify-between py-7 px-6 bg-secondary rounded-t-2xl font-medium text-white">
                         <h4></h4>
                         <h4 className="md:col-span-3">ITEM IMAGE</h4>
@@ -55,6 +56,7 @@ const Cart = () => {
                         <h4 className="md:col-span-2">PRICE</h4>
                         <h4 className="md:col-span-1">ACTION</h4>
                     </div>
+                    {/* body */}
                     <div>
                         {
                             cart.map((item, index) => <div 

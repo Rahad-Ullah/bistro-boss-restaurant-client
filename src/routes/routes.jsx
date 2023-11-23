@@ -9,6 +9,8 @@ import Auth from "../layouts/Auth";
 import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../layouts/Dashboard";
 import Cart from "../pages/Dashboard/Cart/Cart";
+import PrivateRoute from "./PrivateRoute";
+import AllUsers from "../pages/Dashboard/Cart/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
           path: 'order/:category',
           element: <OrderFood></OrderFood>
         },
+        {
+          path: 'contact-us',
+          element: <></>
+        }
       ]
     },
     {
@@ -41,7 +47,7 @@ const router = createBrowserRouter([
         {
           path: 'sign-up',
           element: <SignUp></SignUp>
-        }
+        },
       ]
     },
     {
@@ -49,12 +55,12 @@ const router = createBrowserRouter([
       element: <Dashboard></Dashboard>,
       children: [
         {
-          path: 'home',
+          path: 'user-home',
           element: <></>
         },
         {
           path: 'cart',
-          element: <Cart></Cart>
+          element: <PrivateRoute><Cart></Cart></PrivateRoute>
         },
         {
           path: 'payment-history',
@@ -67,6 +73,10 @@ const router = createBrowserRouter([
         {
           path: 'review',
           element: <></>
+        },
+        {
+          path: 'users',
+          element: <AllUsers></AllUsers>
         },
       ]
     },
