@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure()
-    // load users by TanStack Query
+    // load users by TanStack Query and JWT
     const {data: users = [], refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
