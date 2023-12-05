@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 

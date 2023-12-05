@@ -8,8 +8,10 @@ import Swal from "sweetalert2";
 import HelmetDynamic from "../../components/Helmet/HelmetDynamic";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
+
+
 const Login = () => {
-    const [disabled, setDisabled] = useState(true)
+    const [disabled, setDisabled] = useState(false)
     const [error, setError] = useState(null)
     const captchaRef = useRef()
     const navigate = useNavigate()
@@ -135,7 +137,7 @@ const Login = () => {
                             placeholder="Enter Captcha"
                             className="input input-bordered"
                             name="captcha"
-                            required
+                            // required
                         />
                         {error === 'success' && <p className="text-green-600
                          text-sm mt-1">Captcha matched</p>}

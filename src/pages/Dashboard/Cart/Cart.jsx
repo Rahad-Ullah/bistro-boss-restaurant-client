@@ -3,6 +3,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cart, refetch] = useCart()
@@ -38,14 +39,18 @@ const Cart = () => {
     return (
         <div className="bg-base-200 pb-16">
             <SectionTitle
-                heading={'ADD AN ITEM'}
+                heading={'Check Out'}
                 subHeading={'Whats new?'}
             ></SectionTitle>
             <div className="p-12 bg-white w-4/5 mx-auto">
                 <div className="flex justify-between items-center pb-8">
                     <h2 className="text-2xl">Total Items: {cart.length}</h2>
                     <h2 className="text-2xl">Total Price: $ {totalPrice.toFixed(2)}</h2>
-                    <button className="btn btn-secondary">Pay</button>
+                    {
+                        cart.length ?
+                        <Link to={'/dashboard/payment'} className="btn btn-secondary">Pay</Link>
+                        : <button disabled={!cart.length} to={'/dashboard/payment'} className="btn btn-secondary">Pay</button>
+                    }
                 </div>
                 <div>
                     {/* heading */}

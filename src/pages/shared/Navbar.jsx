@@ -17,7 +17,7 @@ const Navbar = () => {
     
     const links = <>
         <li><NavLink to={'/'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Home</NavLink></li>
-        <li><NavLink to={'/dashboard'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Dashboard</NavLink></li>
+        <li><NavLink to={'/dashboard/user-home'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Dashboard</NavLink></li>
         <li><NavLink to={'/menu'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Our Menu</NavLink></li>
         <li><NavLink to={'/order/salad'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Our Shop</NavLink></li>
         <li><NavLink to={'/contact-us'} className={({isActive}) => isActive ? 'text-[#EEFF25]' : 'text-white'}>Contact Us</NavLink></li>
